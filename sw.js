@@ -21,7 +21,6 @@ var contentToCache = [
     '/icons/maskable_icon.png',
 ];
 
-var contentToCache = appShellFiles.concat(gamesImages);
 self.addEventListener('install', (e) => {
     console.log('[Service Worker] Install');
     e.waitUntil(
