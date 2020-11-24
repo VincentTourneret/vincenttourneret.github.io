@@ -576,7 +576,11 @@ document.addEventListener("DOMContentLoaded", function (_e) {
     }
 
 });
-
+/**
+ *
+ *          SERVICE WORKER WHEN NO CONNECTION
+ *
+ */
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/app.js').then(function(registration) {
@@ -656,4 +660,10 @@ self.addEventListener('activate', function(event) {
             );
         })
     );
+});
+
+cache.addAll(urlsToPrefetch.map(function(urlToPrefetch) {
+    return new Request(urlToPrefetch, { mode: 'no-cors' });
+})).then(function() {
+    console.log('All resources have been fetched and cached.');
 });
