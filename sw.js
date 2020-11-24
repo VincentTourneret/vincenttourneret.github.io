@@ -45,3 +45,23 @@ self.addEventListener('fetch', (e) => {
         })
     );
 });
+
+self.addEventListener('install', (e) => {
+    e.waitUntil(
+        caches.open('js13kPWA-v2').then((cache) => {
+            return cache.addAll(contentToCache);
+        })
+    );
+});
+
+self.addEventListener('activate', (e) => {
+    e.waitUntil(
+        caches.keys().then((keyList) => {
+            return Promise.all(keyList.map((key) => {
+                if(key !== cacheName) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+    );
+});
