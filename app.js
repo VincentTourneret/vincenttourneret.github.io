@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function (_e) {
             alert("Votre appareil ne supporte pas la géolocalisation.");    
         }
     }
-    
-    
+
+
     /******************************************************************
                             Gestion des événements 
     ******************************************************************/
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function (_e) {
 
     
     
-    
+
     /******************************************************************
                             Modèle de données 
     ******************************************************************/
@@ -208,6 +208,8 @@ document.addEventListener("DOMContentLoaded", function (_e) {
     /** 
      *  Objet permettant la gestion des favoris (station, ligne, direction)
      */
+
+
     var favoris = { 
         // map listant les stations favorites sous la forme (station:ligne:direction)
         contenu: (function() {
@@ -574,3 +576,15 @@ document.addEventListener("DOMContentLoaded", function (_e) {
     }
 
 });
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/app.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
+    });
+}
