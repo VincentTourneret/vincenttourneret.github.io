@@ -4,6 +4,7 @@ var contentToCache = [
     'index.html',
     'app.js',
     'style.css',
+    'icons/favicon.ico',
     'icons/icon-32.png',
     'icons/icon-64.png',
     'icons/icon-96.png',
