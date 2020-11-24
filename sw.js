@@ -3,7 +3,8 @@ self.addEventListener('install', (e) => {
 });
 
 var cacheName = 'js13kPWA-v1';
-var appShellFiles = [
+
+var contentToCache = [
     '/',
     '/index.html',
     '/app.js',
@@ -20,10 +21,6 @@ var appShellFiles = [
     '/icons/maskable_icon.png',
 ];
 
-var gamesImages = [];
-for(var i=0; i<games.length; i++) {
-    gamesImages.push('data/img/'+games[i].slug+'.jpg');
-}
 var contentToCache = appShellFiles.concat(gamesImages);
 self.addEventListener('install', (e) => {
     console.log('[Service Worker] Install');
@@ -36,16 +33,5 @@ self.addEventListener('install', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-    e.respondWith(
-        caches.match(e.request).then((r) => {
-            console.log('[Service Worker] Fetching resource: '+e.request.url);
-            return r || fetch(e.request).then((response) => {
-                return caches.open(cacheName).then((cache) => {
-                    console.log('[Service Worker] Caching new resource: '+e.request.url);
-                    cache.put(e.request, response.clone());
-                    return response;
-                });
-            });
-        })
-    );
+    console.log('[Service Worker] Fetched resource '+e.request.url);
 });
