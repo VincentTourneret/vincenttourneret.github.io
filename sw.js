@@ -1,9 +1,9 @@
 self.addEventListener('install', (e) => {
+
     console.log('[Service Worker] Install');
     var cacheName = 'ginko-v1';
 
     var contentToCache = [
-        '/',
         '/index.html',
         '/app.js',
         '/style.css',
@@ -19,6 +19,7 @@ self.addEventListener('install', (e) => {
         '/icons/icon-512.png',
         '/icons/maskable_icon.png'
     ];
+
     e.waitUntil(
         caches.open(cacheName).then((cache) => {
             console.log('[Service Worker] Caching all: app shell and content');
