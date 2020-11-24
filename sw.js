@@ -1,36 +1,39 @@
-
 self.addEventListener('install', (e) => {
     console.log('[Service Worker] Install');
 });
 
-var cacheName = 'ginkoCache-v1';
+var cacheName = 'js13kPWA-v1';
 var appShellFiles = [
     '/',
     '/index.html',
     '/app.js',
     '/style.css',
+    '/favicon.ico',
     '/icons/icon-32.png',
     '/icons/icon-64.png',
+    '/icons/icon-96.png',
     '/icons/icon-128.png',
     '/icons/icon-168.png',
-    '/icons/icon-180.png',
     '/icons/icon-192.png',
     '/icons/icon-256.png',
     '/icons/icon-512.png',
-    '/icons/favicon.ico',
-    '/icons/maskable_icon.png'
+    '/icons/maskable_icon.png',
 ];
 
+var gamesImages = [];
+for(var i=0; i<games.length; i++) {
+    gamesImages.push('data/img/'+games[i].slug+'.jpg');
+}
+var contentToCache = appShellFiles.concat(gamesImages);
 self.addEventListener('install', (e) => {
     console.log('[Service Worker] Install');
     e.waitUntil(
         caches.open(cacheName).then((cache) => {
             console.log('[Service Worker] Caching all: app shell and content');
-            return cache.addAll(appShellFiles);
+            return cache.addAll(contentToCache);
         })
     );
 });
-
 
 self.addEventListener('fetch', (e) => {
     e.respondWith(
@@ -43,18 +46,6 @@ self.addEventListener('fetch', (e) => {
                     return response;
                 });
             });
-        })
-    );
-});
-
-self.addEventListener('activate', (e) => {
-    e.waitUntil(
-        caches.keys().then((keyList) => {
-            return Promise.all(keyList.map((key) => {
-                if(key !== cacheName) {
-                    return caches.delete(key);
-                }
-            }));
         })
     );
 });
