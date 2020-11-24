@@ -4,7 +4,7 @@ self.addEventListener('install', (e) => {
     var cacheName = 'ginko-v1';
 
     var contentToCache = [
-        // '/index.html',
+        'index.html',
         // '/app.js',
         // '/style.css',
         // '/favicon.ico',
