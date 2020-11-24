@@ -31,6 +31,7 @@ self.addEventListener('install', (e) => {
     );
 });
 
+
 self.addEventListener('fetch', (e) => {
     e.respondWith(
         caches.match(e.request).then((r) => {
@@ -42,14 +43,6 @@ self.addEventListener('fetch', (e) => {
                     return response;
                 });
             });
-        })
-    );
-});
-
-self.addEventListener('install', (e) => {
-    e.waitUntil(
-        caches.open('js13kPWA-v2').then((cache) => {
-            return cache.addAll(contentToCache);
         })
     );
 });
