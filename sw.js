@@ -13,10 +13,11 @@ self.addEventListener('install', (e) => {
         '/icons/icon-96.png',
         '/icons/icon-128.png',
         '/icons/icon-168.png',
+        '/icons/icon-180.png',
         '/icons/icon-192.png',
         '/icons/icon-256.png',
         '/icons/icon-512.png',
-        '/icons/maskable_icon.png',
+        '/icons/maskable_icon.png'
     ];
     e.waitUntil(
         caches.open(cacheName).then((cache) => {
