@@ -575,16 +575,18 @@ document.addEventListener("DOMContentLoaded", function (_e) {
         });
     }
 
+    /**
+     *
+     *          SERVICE WORKER WHEN NO CONNECTION
+     *
+     */
+
+
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+    };
+
+
 });
 
 
-/**
- *
- *          SERVICE WORKER WHEN NO CONNECTION
- *
- */
-
-
-if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-};
